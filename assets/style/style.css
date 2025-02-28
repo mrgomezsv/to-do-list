@@ -82,3 +82,10 @@ body {
   button.deleteBtn:hover {
     background-color: #c82333;
   }
+
+  .profile-img {
+    width: 100px; /* Reducimos el ancho al 50% */
+    height: 100px; /* Reducimos el alto al 50% */
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }

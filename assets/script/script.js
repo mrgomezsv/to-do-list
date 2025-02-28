@@ -25,13 +25,19 @@ function addTask(taskText, isCompleted = false) {// Agrega una tarea a la lista
   }
 
 
-  const deleteBtn = document.createElement('button');  // Botón para eliminar
-  deleteBtn.textContent = 'Eliminar';
-  deleteBtn.classList.add('deleteBtn');
-  deleteBtn.addEventListener('click', () => { // Evento del boton
+
+const deleteBtn = document.createElement('button'); // Botón para eliminar tarea
+deleteBtn.textContent = 'Eliminar';
+deleteBtn.classList.add('deleteBtn');
+deleteBtn.addEventListener('click', () => {
+  console.log('¿Estás seguro de que quieres eliminar esta tarea?');
+
+  const confirmar = confirm('¿Estás seguro de que quieres eliminar esta tarea?');
+  if (confirmar) {
     taskList.removeChild(li);
     saveTasks();
-  });
+  }
+});
 
 
   li.addEventListener('click', () => {  // Marco tarea como completada

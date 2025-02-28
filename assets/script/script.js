@@ -4,19 +4,16 @@ const taskDescription = document.getElementById('taskDescription');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
 
-
 document.addEventListener('DOMContentLoaded', loadTasks); // Carga las tareas desde localStorage al iniciar
 
-
 addTaskBtn.addEventListener('click', addTask); // Agregar tarea al hacer clic
-
 
 taskTitle.addEventListener('keydown', (event) => { // Tecla Enter en el campo de título
   if (event.key === 'Enter') addTask();
 });
 
 
-taskDescription.addEventListener('keydown', (event) => {// Tecla Enter en el campo de descripción
+taskDescription.addEventListener('keydown', (event) => { // Tecla Enter en el campo de descripción
   if (event.key === 'Enter') addTask();
 });
 
@@ -45,11 +42,11 @@ function createTask(title, description, status) { // Agrega una tarea a la lista
   `;
 
 
-  const buttonContainer = document.createElement('div');// Contenedor para los botones
+  const buttonContainer = document.createElement('div'); // Contenedor para los botones
   buttonContainer.classList.add('button-container');
 
 
-  const actionBtn = document.createElement('button');// Botón multifuncional (Cambiar estado)
+  const actionBtn = document.createElement('button'); // Botón multifuncional (Cambiar estado)
   actionBtn.classList.add('actionBtn');
   updateButton(actionBtn, status);
 
@@ -59,18 +56,17 @@ function createTask(title, description, status) { // Agrega una tarea a la lista
   });
 
 
-  const editBtn = document.createElement('button');// Botón de editar (solo visible en estado "En Proceso")
+  const editBtn = document.createElement('button'); // Botón de editar (solo visible en estado "En Proceso")
   editBtn.textContent = 'Editar';
   editBtn.classList.add('editBtn');
   editBtn.style.display = status === 'En Proceso' ? 'block' : 'none';
-
 
   editBtn.addEventListener('click', () => {
     editTask(li);
   });
 
 
-  const deleteBtn = document.createElement('button');  // Botón de eliminar (solo visible en estado "En Proceso")
+  const deleteBtn = document.createElement('button'); // Botón de eliminar (solo visible en estado "En Proceso")
   deleteBtn.textContent = 'Eliminar';
   deleteBtn.classList.add('deleteBtn');
   deleteBtn.style.display = status === 'En Proceso' ? 'block' : 'none'; // Solo visible en estado "En Proceso"
@@ -78,8 +74,8 @@ function createTask(title, description, status) { // Agrega una tarea a la lista
 
   deleteBtn.addEventListener('click', (event) => {
     event.stopPropagation();
-    const confirm = confirm('¿Estás seguro de que quieres eliminar esta tarea que se encuentra EN PROCESO?');
-    if (confirm) {
+    const confirmDeletion = confirm('¿Estás seguro de que quieres eliminar esta tarea que se encuentra EN PROCESO?');
+    if (confirmDeletion) {
       taskList.removeChild(li);
       saveTasks();
     }

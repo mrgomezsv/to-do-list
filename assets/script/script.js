@@ -7,28 +7,28 @@ document.addEventListener('DOMContentLoaded', loadTasks); // Carga las tareas de
 
 
 addTaskBtn.addEventListener('click', () => { // Agregar tarea
-  addTask();
+  agregarTarea();
 });
 
 
 taskInput.addEventListener('keydown', (event) => {// Tecla Enter en el campo de texto
   if (event.key === 'Enter') {
-    addTask();
+    agregarTarea();
   }
 });
 
 
-function addTask() {// Función para agregar una tarea
+function agregarTarea() {// Función para agregar una tarea
   const taskText = taskInput.value.trim();
   if (taskText !== '') {
-    addTask(taskText);
+    crearTarea(taskText);
     taskInput.value = '';
     saveTasks();
   }
 }
 
 
-function addTask(taskText, isCompleted = false) {// Agrega una tarea a la lista
+function crearTarea(taskText, isCompleted = false) {// Agrega una tarea a la lista
   const li = document.createElement('li');
   li.textContent = taskText;
 
@@ -44,8 +44,8 @@ function addTask(taskText, isCompleted = false) {// Agrega una tarea a la lista
     event.stopPropagation();
     console.log('¿Estás seguro de que quieres eliminar esta tarea?');
 
-    const confirm = confirm('¿Estás seguro de que quieres eliminar esta tarea?');
-    if (confirm) {
+    const confirmar = confirm('¿Estás seguro de que quieres eliminar esta tarea?');
+    if (confirmar) {
       taskList.removeChild(li);
       saveTasks();
     }
@@ -55,9 +55,8 @@ function addTask(taskText, isCompleted = false) {// Agrega una tarea a la lista
   li.addEventListener('click', () => { // Marcar tarea como completada o cambiar a pendiente
     if (li.classList.contains('completed')) {
       console.log('Esta tarea ya está COMPLETADA. ¿Deseas cambiarla a pendiente?');
-
-      const confirm = confirm('Esta tarea ya está COMPLETADA. ¿Deseas cambiarla a pendiente?');
-      if (confirm) {
+      const confirmar = confirm('Esta tarea ya está COMPLETADA. ¿Deseas cambiarla a pendiente?');
+      if (confirmar) {
         li.classList.remove('completed');
         saveTasks();
       }
@@ -72,7 +71,7 @@ function addTask(taskText, isCompleted = false) {// Agrega una tarea a la lista
 }
 
 
-function saveTasks() { // Guardar las tareas en localStorage
+function saveTasks() {// Guardo las tareas en localStorage
   const tasks = [];
   taskList.querySelectorAll('li').forEach(li => {
     tasks.push({
@@ -84,9 +83,9 @@ function saveTasks() { // Guardar las tareas en localStorage
 }
 
 
-function loadTasks() { // Cargar las tareas desde localStorage
+function loadTasks() { // Se cargan las tareas desde localStorage
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   tasks.forEach(task => {
-    addTask(task.text, task.completed);
+    crearTarea(task.text, task.completed);
   });
 }
